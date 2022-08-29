@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -19,3 +21,11 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Order(models.Model):
+    placed_at = models.DateTimeField(default=timezone.now())
+    user = models.ForeignKey(User, null=False, on_delete=models.PROTECT)
+    book = models.ForeignKey(Book, null=False, on_delete=models.PROTECT)
+
+
