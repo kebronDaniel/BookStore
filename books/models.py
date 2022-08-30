@@ -17,6 +17,7 @@ class Book(models.Model):
     description = models.TextField()
     publisher = models.CharField(max_length=255)
     published_year = models.DateTimeField()
+    image = models.URLField(max_length=200, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -24,7 +25,7 @@ class Book(models.Model):
 
 
 class Order(models.Model):
-    placed_at = models.DateTimeField(default=timezone.now())
+    placed_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, null=False, on_delete=models.PROTECT)
     book = models.ForeignKey(Book, null=False, on_delete=models.PROTECT)
 
