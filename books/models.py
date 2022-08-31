@@ -17,16 +17,29 @@ class Book(models.Model):
     description = models.TextField()
     publisher = models.CharField(max_length=255)
     published_year = models.DateTimeField()
-    image = models.URLField(max_length=200, null=True)
+    image = models.URLField(max_length=255, null=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
 
 
+class Payment(models.Model):
+    PAYMENT_CHOICES = [
+        ('c', 'credit card'),
+        ('d', 'debit card'),
+        ('p', 'paypal')
+    ]
+
+    payment_options = models.CharField(max_length=1, null=False, choices=PAYMENT_CHOICES, default='c')
+    name_on_the_card = models.CharField(max_length=250, null=False)
+    credit_card_number = models.PositiveIntegerField()
+    expiration = models.DateTimeField(null=True)
+    cvv = models.PositiveSmallIntegerField(null=False)
+
+
 class Order(models.Model):
     placed_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, null=False, on_delete=models.PROTECT)
     book = models.ForeignKey(Book, null=False, on_delete=models.PROTECT)
-
-
+    payment = models.ForeignKey(Payment, null=True, on_delete=models.PROTECT)
