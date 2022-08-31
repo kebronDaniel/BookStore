@@ -6,3 +6,6 @@ def index(request):
     books = Book.objects.all()
     return render(request, 'index.html', context={'books': books})
 
+
+def checkout(request):
+    return render(request, 'checkout.html')
