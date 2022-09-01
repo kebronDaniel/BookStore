@@ -6,4 +6,5 @@ app_name = 'books'
 urlpatterns = [
     path('', views.index, name="index"),
     path('checkout/', views.checkout, name="checkout"),
+    path('genres/', views.genres, name="genres"),
 ]
