@@ -15,6 +15,7 @@ def genres(request):
     all_genres = Genre.objects.all()
     return render(request, 'genres.html', context={'all_genres': all_genres})
 
-def books_list(request,name):
-    booksListing = Book.objects.filter(genre__name__contains = name)
-    return render(request, 'books.html', context={'books': booksListing})
+
+def books_list(request, name):
+    books_listing = Book.objects.filter(genre__name__contains=name)
+    return render(request, 'books.html', context={'books': books_listing})
