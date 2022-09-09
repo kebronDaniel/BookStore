@@ -38,8 +38,17 @@ class Payment(models.Model):
     cvv = models.PositiveSmallIntegerField(null=False)
 
 
+class ShippingAddress(models.Model):
+    address = models.CharField(max_length=255, null=False)
+    optionalAddress = models.CharField(max_length=255, null=True)
+    country = models.CharField(max_length=50, null=False)
+    city = models.CharField(max_length=50, null=False)
+    zip = models.SmallIntegerField(null=False)
+
+
 class Order(models.Model):
     placed_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, null=False, on_delete=models.PROTECT)
     book = models.ForeignKey(Book, null=False, on_delete=models.PROTECT)
     payment = models.ForeignKey(Payment, null=True, on_delete=models.PROTECT)
+    shippingAddress = models.ForeignKey(ShippingAddress, null=True, on_delete=models.PROTECT)
