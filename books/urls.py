@@ -5,7 +5,7 @@ app_name = 'books'
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('checkout/', views.checkout, name="checkout"),
     path('genres/', views.genres, name="genres"),
     path('genres/<str:name>', views.books_list, name="list"),
+    path('genres/<str:name>/<int:id>', views.checkout, name="checkout"),
 ]

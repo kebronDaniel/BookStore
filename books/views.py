@@ -7,8 +7,9 @@ def index(request):
     return render(request, 'index.html', context={'books': books})
 
 
-def checkout(request):
-    return render(request, 'checkout.html')
+def checkout(request, name, id):
+    book = Book.objects.get(pk=id)
+    return render(request, 'checkout.html', context={'book':book})
 
 
 def genres(request):
