@@ -43,7 +43,7 @@ class ShippingAddress(models.Model):
     optionalAddress = models.CharField(max_length=255, null=True)
     country = models.CharField(max_length=50, null=False)
     city = models.CharField(max_length=50, null=False)
-    zip = models.SmallIntegerField(null=False)
+    zip = models.SmallIntegerField(null=False, default=123)
 
 
 class Order(models.Model):
